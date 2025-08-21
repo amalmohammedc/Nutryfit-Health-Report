@@ -49,6 +49,7 @@
             -moz-appearance: textfield;
         }
         /* Print Styles */
+        .print-only { display: none; }
         @media print {
             body {
                 -webkit-print-color-adjust: exact;
@@ -56,6 +57,9 @@
             }
             .no-print {
                 display: none !important;
+            }
+            .print-only {
+                display: grid !important;
             }
             .print-friendly {
                 box-shadow: none !important;
@@ -97,6 +101,7 @@
                     </div>
                     <!-- Right Interactive BMI -->
                     <div class="md:col-span-3 bg-white p-4 rounded-lg">
+                        <!-- Interactive sliders for screen -->
                         <div class="grid grid-cols-2 gap-4 text-center mb-4 no-print">
                             <div>
                                 <div class="text-2xl font-bold nutryfit-dark-green mb-2"><span id="weight-value">87</span> kg</div>
@@ -107,6 +112,18 @@
                                 <div class="text-2xl font-bold nutryfit-dark-green mb-2"><span id="height-value">164</span> cm</div>
                                 <input type="range" id="height-slider" min="140" max="200" value="164" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                                 <label for="height-slider" class="block font-medium text-gray-700 mt-2">Height</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Static values for print -->
+                        <div class="grid-cols-2 gap-4 text-center mb-4 print-only">
+                             <div>
+                                <div class="text-2xl font-bold nutryfit-dark-green mb-2"><span id="print-weight-value">87</span> kg</div>
+                                <label class="block font-medium text-gray-700 mt-2">Weight</label>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold nutryfit-dark-green mb-2"><span id="print-height-value">164</span> cm</div>
+                                <label class="block font-medium text-gray-700 mt-2">Height</label>
                             </div>
                         </div>
                         
@@ -197,6 +214,8 @@
             const ageInput = document.getElementById('age-input');
             const weightValueEl = document.getElementById('weight-value');
             const heightValueEl = document.getElementById('height-value');
+            const printWeightValueEl = document.getElementById('print-weight-value');
+            const printHeightValueEl = document.getElementById('print-height-value');
             const bmiValueTextEl = document.getElementById('bmi-value-text');
             const bmiCategoryTextEl = document.getElementById('bmi-category-text');
             const bmiResultBgEl = document.getElementById('bmi-result-bg');
@@ -241,6 +260,8 @@
                 // Update UI text and colors
                 weightValueEl.textContent = weight;
                 heightValueEl.textContent = heightCm;
+                printWeightValueEl.textContent = weight;
+                printHeightValueEl.textContent = heightCm;
                 bmiValueTextEl.textContent = bmi.toFixed(1);
                 bmiCategoryTextEl.textContent = category;
                 bmiResultBgEl.className = `text-center p-4 rounded-lg ${bgColor} ${textColor}`;
