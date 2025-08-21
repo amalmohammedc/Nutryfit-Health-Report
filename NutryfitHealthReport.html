@@ -21,27 +21,6 @@
             background-color: #2a552a;
             color: white;
         }
-        /* Modal styles */
-        .modal {
-            transition: opacity 0.25s ease;
-        }
-        .modal-active {
-            display: flex;
-        }
-        /* Spinner */
-        .loader {
-            border-top-color: #5a8b5a;
-            -webkit-animation: spinner 1.5s linear infinite;
-            animation: spinner 1.5s linear infinite;
-        }
-        @-webkit-keyframes spinner {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-        @keyframes spinner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         /* Custom styles for the range slider */
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -87,13 +66,21 @@
     </style>
 </head>
 <body class="bg-gray-100 p-4 sm:p-6 md:p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden print-friendly">
+    <div class="max-w-4xl mx-auto rounded-2xl shadow-lg overflow-hidden print-friendly" style="background-color: #E9FDF2;">
         <!-- Header -->
-        <header class="bg-nutryfit-dark-green text-white p-6 text-center relative">
-            <h1 class="text-2xl md:text-3xl font-bold">Nutryfit Health Report</h1>
-            <button id="print-button" class="no-print absolute top-4 right-4 bg-white text-nutryfit-dark-green font-bold py-2 px-4 rounded-full text-sm hover:bg-gray-200 transition">
-                🖨️ Print
-            </button>
+        <header class="p-6 flex justify-between items-center" style="background-color: #E9FDF2;">
+            <!-- Left Logo -->
+            <div class="w-36">
+                 <img src="https://www.nutryfit.in/_next/static/media/logo.37bb63b3.svg" alt="Nutryfit Logo" class="h-16">
+            </div>
+            <!-- Centered Title -->
+            <h1 class="text-2xl md:text-3xl font-bold nutryfit-dark-green text-center">Nutryfit Health Report</h1>
+            <!-- Right Button -->
+            <div class="w-36 flex justify-end">
+                <button id="print-button" class="no-print bg-white text-black font-bold py-2 px-4 rounded-full text-sm hover:bg-gray-200 transition">
+                    🖨️ Print
+                </button>
+            </div>
         </header>
 
         <main class="p-6 md:p-8 space-y-8">
@@ -103,27 +90,27 @@
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
                     <!-- Left Stats -->
                     <div class="md:col-span-2 space-y-3 text-gray-700">
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
                             <label for="name-input" class="font-medium">Name:</label>
-                            <input type="text" id="name-input" class="w-2/3 font-bold nutryfit-dark-green bg-transparent border-0 focus:ring-0 p-0" value="Client">
+                            <input type="text" id="name-input" class="w-2/3 text-left font-bold nutryfit-dark-green bg-transparent border-0 focus:ring-0 p-0 appearance-none" placeholder="Enter Name">
                         </div>
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
                             <label for="age-input" class="font-medium">Age:</label>
-                            <input type="number" id="age-input" class="w-2/3 font-bold nutryfit-dark-green bg-transparent border-0 focus:ring-0 p-0" value="35">
+                            <input type="number" id="age-input" class="w-2/3 text-left font-bold nutryfit-dark-green bg-transparent border-0 focus:ring-0 p-0 appearance-none" placeholder="Enter Age">
                         </div>
                     </div>
                     <!-- Right Interactive BMI -->
-                    <div class="md:col-span-3 bg-gray-50 p-4 rounded-lg">
+                    <div class="md:col-span-3 bg-white p-4 rounded-lg">
                         <div class="grid grid-cols-2 gap-4 text-center mb-4 no-print">
                             <div>
-                                <label for="weight-slider" class="block font-medium text-gray-700 mb-2">Weight</label>
+                                <div class="text-2xl font-bold nutryfit-dark-green mb-2"><span id="weight-value">87</span> kg</div>
                                 <input type="range" id="weight-slider" min="40" max="120" value="87" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                                <div class="text-2xl font-bold nutryfit-dark-green mt-2"><span id="weight-value">87</span> kg</div>
+                                <label for="weight-slider" class="block font-medium text-gray-700 mt-2">Weight</label>
                             </div>
                             <div>
-                                <label for="height-slider" class="block font-medium text-gray-700 mb-2">Height</label>
+                                <div class="text-2xl font-bold nutryfit-dark-green mb-2"><span id="height-value">164</span> cm</div>
                                 <input type="range" id="height-slider" min="140" max="200" value="164" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                                <div class="text-2xl font-bold nutryfit-dark-green mt-2"><span id="height-value">164</span> cm</div>
+                                <label for="height-slider" class="block font-medium text-gray-700 mt-2">Height</label>
                             </div>
                         </div>
                         
@@ -156,7 +143,7 @@
             <!-- Daily Calorie Needs -->
             <section id="calorie-needs">
                 <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Daily Calorie Needs</h2>
-                <div class="bg-gray-50 p-6 rounded-lg">
+                <div class="bg-white p-6 rounded-lg">
                     <p class="text-center text-gray-600 mb-4">Your Basal Metabolic Rate (BMR) is <strong id="bmr-value" class="nutryfit-dark-green">1725 kcal/day</strong>. Select your activity level to estimate your total daily calorie needs.</p>
                     <div id="activity-selector" class="flex flex-wrap justify-center gap-2 mb-6 no-print">
                         <button class="tab active px-4 py-2 rounded-full text-sm font-medium transition" data-multiplier="1.2">Sedentary</button>
@@ -171,9 +158,19 @@
                 </div>
             </section>
 
+            <!-- Recommendations -->
+            <section id="recommendations">
+                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">General Recommendations</h2>
+                <div class="space-y-4">
+                    <details class="group bg-white p-4 rounded-lg cursor-pointer"><summary class="flex justify-between items-center font-semibold nutryfit-dark-green">Dietary Recommendations<svg class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="mt-4 text-gray-700 space-y-2"><p><strong>Focus on Nutrient-Dense Foods:</strong> Prioritize whole foods like fruits, vegetables, lean proteins (chicken, fish, beans) and whole grains (oats, brown rice).</p><p><strong>Practice Portion Control:</strong> Use smaller plates and be mindful of serving sizes to avoid overeating.</p><p><strong>Stay Hydrated:</strong> Drink plenty of water throughout the day. Aim for 8-10 glasses. Avoid sugary drinks and juices.</p><p><strong>Limit Processed Foods:</strong> Reduce intake of foods high in sugar, unhealthy fats and sodium, such as fast food, packaged snacks and sweets.</p></div></details>
+                    <details class="group bg-white p-4 rounded-lg cursor-pointer"><summary class="flex justify-between items-center font-semibold nutryfit-dark-green">Exercise & Physical Activity<svg class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="mt-4 text-gray-700 space-y-2"><p><strong>Aerobic Exercise:</strong> Aim for at least <strong>150 minutes of moderate-intensity</strong> cardio per week. This includes activities like brisk walking, jogging, cycling or swimming.</p><p><strong>Strength Training:</strong> Incorporate strength training exercises 2-3 times per week. This builds muscle, which boosts your metabolism. You can use weights, resistance bands or your own body weight.</p><p><strong>Stay Consistent:</strong> Find activities you enjoy to make it easier to stick with a routine. Even small amounts of activity are better than none.</p><p><strong>Increase Daily Movement:</strong> Take the stairs, walk during phone calls or go for a short walk after meals to increase your overall activity level.</p></div></details>
+                    <details class="group bg-white p-4 rounded-lg cursor-pointer"><summary class="flex justify-between items-center font-semibold nutryfit-dark-green">Lifestyle Habits<svg class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="mt-4 text-gray-700 space-y-2"><p><strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality sleep per night. Poor sleep can affect hormones that regulate appetite.</p><p><strong>Manage Stress:</strong> Find healthy ways to cope with stress, such as meditation, deep breathing exercises, hobbies or spending time in nature.</p><p><strong>Be Patient & Consistent:</strong> Healthy weight loss is a gradual process. Focus on making sustainable changes rather than quick fixes.</p></div></details>
+                </div>
+            </section>
+            
             <!-- Personalized Plan CTA -->
             <section id="cta-plan">
-                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                <div class="bg-white p-6 rounded-lg text-center">
                     <p class="text-gray-800 text-lg mb-4">For a Personalized Diet Plan for your body, connect with Nutryfit.</p>
                     <a href="https://wa.me/918594001161" target="_blank" class="inline-flex items-center justify-center bg-nutryfit-light-green hover:bg-nutryfit-darker-green text-white font-bold py-3 px-6 rounded-full transition duration-300 text-lg">
                         <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 22L7.31 20.62C8.75 21.41 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 3.67C14.24 3.67 16.3 4.5 17.82 6.02C19.33 7.53 20.18 9.6 20.18 11.91C20.18 16.49 16.57 20.11 12.04 20.11C10.49 20.11 8.99 19.68 7.7 18.89L7.28 18.63L3.88 19.54L4.81 16.2L4.54 15.78C3.68 14.41 3.21 12.88 3.21 11.91C3.21 7.33 6.82 3.67 12.04 3.67ZM9.1 7.49C8.91 7.49 8.72 7.55 8.57 7.8C8.42 8.05 7.81 8.66 7.81 9.71C7.81 10.76 8.59 11.75 8.72 11.91C8.84 12.07 10.21 14.21 12.53 15.11C14.49 15.87 14.85 15.72 15.24 15.68C15.79 15.62 16.78 15.03 16.99 14.47C17.2 13.91 17.2 13.44 17.12 13.32C17.04 13.2 16.85 13.14 16.59 13C16.34 12.86 15.09 12.25 14.87 12.17C14.65 12.09 14.5 12.03 14.34 12.28C14.19 12.53 13.73 13.04 13.58 13.2C13.42 13.36 13.27 13.42 13.02 13.28C12.77 13.14 11.92 12.83 10.9 11.96C10.11 11.31 9.59 10.5 9.47 10.29C9.35 10.08 9.49 9.95 9.61 9.83C9.72 9.73 9.85 9.56 9.97 9.42C10.09 9.28 10.15 9.16 10.23 9C10.31 8.84 10.25 8.69 10.19 8.57C10.13 8.45 9.62 7.49 9.42 7.49H9.1Z"></path></svg>
@@ -181,19 +178,12 @@
                     </a>
                 </div>
             </section>
-
-            <!-- Recommendations -->
-            <section id="recommendations">
-                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">General Recommendations</h2>
-                <div class="space-y-4">
-                    <details class="group bg-green-50 p-4 rounded-lg cursor-pointer"><summary class="flex justify-between items-center font-semibold text-green-800">Dietary Recommendations<svg class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="mt-4 text-gray-700 space-y-2"><p><strong>Focus on Nutrient-Dense Foods:</strong> Prioritize whole foods like fruits, vegetables, lean proteins (chicken, fish, beans) and whole grains (oats, brown rice).</p><p><strong>Practice Portion Control:</strong> Use smaller plates and be mindful of serving sizes to avoid overeating.</p><p><strong>Stay Hydrated:</strong> Drink plenty of water throughout the day. Aim for 8-10 glasses. Avoid sugary drinks and juices.</p><p><strong>Limit Processed Foods:</strong> Reduce intake of foods high in sugar, unhealthy fats and sodium, such as fast food, packaged snacks and sweets.</p></div></details>
-                    <details class="group bg-green-50 p-4 rounded-lg cursor-pointer"><summary class="flex justify-between items-center font-semibold text-green-800">Exercise & Physical Activity<svg class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="mt-4 text-gray-700 space-y-2"><p><strong>Aerobic Exercise:</strong> Aim for at least <strong>150 minutes of moderate-intensity</strong> cardio per week. This includes activities like brisk walking, jogging, cycling or swimming.</p><p><strong>Strength Training:</strong> Incorporate strength training exercises 2-3 times per week. This builds muscle, which boosts your metabolism. You can use weights, resistance bands or your own body weight.</p><p><strong>Stay Consistent:</strong> Find activities you enjoy to make it easier to stick with a routine. Even small amounts of activity are better than none.</p><p><strong>Increase Daily Movement:</strong> Take the stairs, walk during phone calls or go for a short walk after meals to increase your overall activity level.</p></div></details>
-                    <details class="group bg-green-50 p-4 rounded-lg cursor-pointer"><summary class="flex justify-between items-center font-semibold text-green-800">Lifestyle Habits<svg class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="mt-4 text-gray-700 space-y-2"><p><strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality sleep per night. Poor sleep can affect hormones that regulate appetite.</p><p><strong>Manage Stress:</strong> Find healthy ways to cope with stress, such as meditation, deep breathing exercises, hobbies or spending time in nature.</p><p><strong>Be Patient & Consistent:</strong> Healthy weight loss is a gradual process. Focus on making sustainable changes rather than quick fixes.</p></div></details>
-                </div>
-            </section>
         </main>
 
-        <footer class="bg-gray-100 p-4 text-center text-xs text-gray-500 border-t no-print"><p><strong>Disclaimer:</strong> This report provides general health and wellness information and is not a substitute for professional medical advice. Please consult with a doctor or a registered dietitian before starting any new diet or exercise program.</p></footer>
+        <footer class="bg-gray-100 p-6 text-center text-xs text-gray-500 border-t no-print">
+            <img src="https://www.nutryfit.in/_next/static/media/logo.37bb63b3.svg" alt="Nutryfit Logo" class="h-10 mx-auto mb-4">
+            <p><strong>Disclaimer:</strong> This report provides general health and wellness information and is not a substitute for professional medical advice. Please consult with a doctor or a registered dietitian before starting any new diet or exercise program.</p>
+        </footer>
     </div>
 
 
