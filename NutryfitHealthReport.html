@@ -135,10 +135,10 @@
 
                         <div class="mt-4">
                             <div class="w-full bg-gray-200 rounded-full h-2.5 relative">
-                                <div class="bg-blue-500 h-2.5 rounded-l-full" style="width: 21.25%"></div>
-                                <div class="bg-nutryfit-light-green h-2.5 absolute top-0" style="left: 21.25%; width: 27.5%"></div>
-                                <div class="bg-orange-500 h-2.5 absolute top-0" style="left: 48.75%; width: 12.5%"></div>
-                                <div class="bg-red-500 h-2.5 rounded-r-full absolute top-0" style="left: 61.25%; width: 38.75%"></div>
+                                <div class="bg-blue-500 h-2.5 rounded-l-full" style="width: 10.42%;"></div>
+                                <div class="bg-nutryfit-light-green h-2.5 absolute top-0" style="left: 10.42%; width: 27.08%;"></div>
+                                <div class="bg-orange-500 h-2.5 absolute top-0" style="left: 37.5%; width: 20.83%;"></div>
+                                <div class="bg-red-500 h-2.5 rounded-r-full absolute top-0" style="left: 58.33%; width: 41.67%;"></div>
                                 <div id="bmi-marker" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-2 border-gray-800 rounded-full no-print" style="left: 70.75%;"></div>
                             </div>
                             <div class="flex justify-between text-xs mt-1 px-1">
@@ -232,13 +232,11 @@
             function updateReport() {
                 const weight = parseInt(weightSlider.value);
                 const heightCm = parseInt(heightSlider.value);
-                const age = parseInt(ageInput.value) || 0; // Fallback age
+                const age = parseInt(ageInput.value) || 35; // Use a default age of 35 if the input is empty
                 const heightM = heightCm / 100;
 
                 updateBmiSection(weight, heightM, heightCm);
-                if (age > 0) {
-                    updateCaloriesSection(weight, heightCm, age);
-                }
+                updateCaloriesSection(weight, heightCm, age); // Always update calories
             }
 
             // --- Update BMI Section ---
@@ -330,3 +328,5 @@
     </script>
 </body>
 </html>
+
+
